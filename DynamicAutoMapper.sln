@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicAutoMapper", "DynamicAutoMapper\DynamicAutoMapper.csproj", "{01329F1E-5CED-4A40-A926-B39483E48B52}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicAutoMapper.Tests", "DynamicAutoMapper.Tests\DynamicAutoMapper.Tests.csproj", "{591C1573-81A9-46F1-864E-D1F56831FC58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{01329F1E-5CED-4A40-A926-B39483E48B52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01329F1E-5CED-4A40-A926-B39483E48B52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01329F1E-5CED-4A40-A926-B39483E48B52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{591C1573-81A9-46F1-864E-D1F56831FC58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{591C1573-81A9-46F1-864E-D1F56831FC58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{591C1573-81A9-46F1-864E-D1F56831FC58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{591C1573-81A9-46F1-864E-D1F56831FC58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
