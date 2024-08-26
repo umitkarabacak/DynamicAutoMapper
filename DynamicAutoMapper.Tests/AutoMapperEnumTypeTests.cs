@@ -29,8 +29,7 @@ public class AutoMapperEnumTypeTests
 
         // Assert
         Assert.Equal(entity.Id, viewModel.Id);
-        //TODO write to rule
-        //Assert.Equal(entity.Value, viewModel.Value);
+        Assert.Equal(entity.Value, viewModel.Value);
     }
 
     [Theory]
@@ -54,7 +53,7 @@ public class AutoMapperEnumTypeTests
 
         // Assert
         Assert.Equal(entity.Id, viewModel.Id);
-        //Assert.Equal(entity.Value, viewModel.Value);
+        Assert.Equal(entity.Value, viewModel.Value);
     }
 
     [Fact]
@@ -72,7 +71,7 @@ public class AutoMapperEnumTypeTests
 
         // Assert
         Assert.Equal(viewModel.Id, entity.Id);
-        //Assert.Equal(viewModel.Value, entity.Value);
+        Assert.Equal(viewModel.Value, entity.Value);
     }
 
     [Theory]
