@@ -14,63 +14,83 @@ public class AutoMapperTests
         _mapper = config.CreateMapper();
     }
 
-    //[Fact]
-    //public void Should_Map_EntityToViewModel()
-    //{
-    //    // Arrange
-    //    var entity = new YourEntity
-    //    {
-    //        Id = 1,
-    //        Name = "Test Entity",
-    //        // Diğer özellikler
-    //    };
+    [Fact]
+    public void Should_Map_EntityToViewModelDefaultValue()
+    {
+        // Arrange
+        var entity = new StringModel
+        {
+            Id = Random.Shared.Next(0, 250),
+            Value = string.Empty,
+        };
 
-    //    // Act
-    //    var viewModel = _mapper.Map<YourViewModel>(entity);
+        // Act
+        var viewModel = _mapper.Map<StringModelViewModel>(entity);
 
-    //    // Assert
-    //    Assert.Equal(entity.Id, viewModel.Id);
-    //    Assert.Equal(entity.Name, viewModel.Name);
-    //    // Diğer özellikler için de aynı şekilde kontrol yapabilirsiniz
-    //}
+        // Assert
+        Assert.Equal(entity.Id, viewModel.Id);
+        Assert.Equal(entity.Value, viewModel.Value);
+    }
 
-    //[Fact]
-    //public void Should_Map_ViewModelToEntity()
-    //{
-    //    // Arrange
-    //    var viewModel = new YourViewModel
-    //    {
-    //        Id = 1,
-    //        Name = "Test ViewModel",
-    //        // Diğer özellikler
-    //    };
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("ÜmİT")]
+    [InlineData("ÜMİT KARABACAK")]
+    public void Should_Map_EntityToViewModelWithValue(string parameterValue)
+    {
+        // Arrange
+        var entity = new StringModel
+        {
+            Id = Random.Shared.Next(0, 250),
+            Value = parameterValue,
+        };
 
-    //    // Act
-    //    var entity = _mapper.Map<YourEntity>(viewModel);
+        // Act
+        var viewModel = _mapper.Map<StringModelViewModel>(entity);
 
-    //    // Assert
-    //    Assert.Equal(viewModel.Id, entity.Id);
-    //    Assert.Equal(viewModel.Name, entity.Name);
-    //    // Diğer özellikler için de aynı şekilde kontrol yapabilirsiniz
-    //}
+        // Assert
+        Assert.Equal(entity.Id, viewModel.Id);
+        Assert.Equal(entity.Value, viewModel.Value);
+    }
 
-    //[Fact]
-    //public void Should_Map_EnumArray_Properly()
-    //{
-    //    // Arrange
-    //    var entity = new YourEntity
-    //    {
-    //        EnumArray = new[] { YourEnum.Value1, YourEnum.Value2 }
-    //    };
+    [Fact]
+    public void Should_Map_ViewModelToEntityDefaultValue()
+    {
+        // Arrange
+        var viewModel = new StringModelViewModel
+        {
+            Id = 1,
+            Value = string.Empty,
+        };
 
-    //    // Act
-    //    var viewModel = _mapper.Map<YourViewModel>(entity);
+        // Act
+        var entity = _mapper.Map<StringModel>(viewModel);
 
-    //    // Assert
-    //    Assert.NotNull(viewModel.EnumArray);
-    //    Assert.Equal(entity.EnumArray.Length, viewModel.EnumArray.Length);
-    //    Assert.Contains("Value1", viewModel.EnumArray);
-    //    Assert.Contains("Value2", viewModel.EnumArray);
-    //}
+        // Assert
+        Assert.Equal(viewModel.Id, entity.Id);
+        Assert.Equal(viewModel.Value, entity.Value);
+    }
 
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("ÜmİT")]
+    [InlineData("ÜMİT KARABACAK")]
+    public void Should_Map_ViewModelToEntitylWithValue(string parameterValue)
+    {
+        // Arrange
+        var viewModel = new StringModelViewModel
+        {
+            Id = 1,
+            Value = string.Empty,
+        };
+
+        // Act
+        var entity = _mapper.Map<StringModel>(viewModel);
+
+        // Assert
+        Assert.Equal(viewModel.Id, entity.Id);
+        Assert.Equal(viewModel.Value, entity.Value);
+    }
 }
