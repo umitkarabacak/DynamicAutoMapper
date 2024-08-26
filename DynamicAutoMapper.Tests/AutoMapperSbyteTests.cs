@@ -1,10 +1,10 @@
 ﻿namespace DynamicAutoMapper.Tests;
 
-public class AutoMapperByteTests
+public class AutoMapperSbyteTests
 {
     private readonly IMapper _mapper;
 
-    public AutoMapperByteTests()
+    public AutoMapperSbyteTests()
     {
         var config = new MapperConfiguration(cfg =>
         {
@@ -18,14 +18,14 @@ public class AutoMapperByteTests
     public void Should_Map_EntityToViewModelDefaultValue()
     {
         // Arrange
-        var entity = new ByteModel
+        var entity = new SbyteModel
         {
             Id = Random.Shared.Next(0, 250),
             Value = default,
         };
 
         // Act
-        var viewModel = _mapper.Map<ByteModelViewModel>(entity);
+        var viewModel = _mapper.Map<SbyteModelViewModel>(entity);
 
         // Assert
         Assert.Equal(entity.Id, viewModel.Id);
@@ -33,22 +33,21 @@ public class AutoMapperByteTests
     }
 
     [Theory]
-    [InlineData(default)]
     [InlineData(null)]
-    [InlineData(byte.MinValue)]
+    [InlineData(sbyte.MinValue)]
     [InlineData(0)]
-    [InlineData(byte.MaxValue)]
-    public void Should_Map_EntityToViewModelWithValue(byte parameterValue)
+    [InlineData(sbyte.MaxValue)]
+    public void Should_Map_EntityToViewModelWithValue(sbyte parameterValue)
     {
         // Arrange
-        var entity = new ByteModel
+        var entity = new SbyteModel
         {
             Id = Random.Shared.Next(0, 250),
             Value = parameterValue,
         };
 
         // Act
-        var viewModel = _mapper.Map<ByteModelViewModel>(entity);
+        var viewModel = _mapper.Map<SbyteModelViewModel>(entity);
 
         // Assert
         Assert.Equal(entity.Id, viewModel.Id);
@@ -59,14 +58,14 @@ public class AutoMapperByteTests
     public void Should_Map_ViewModelToEntityDefaultValue()
     {
         // Arrange
-        var viewModel = new ByteModelViewModel
+        var viewModel = new SbyteModelViewModel
         {
             Id = 1,
             Value = default,
         };
 
         // Act
-        var entity = _mapper.Map<ByteModel>(viewModel);
+        var entity = _mapper.Map<SbyteModel>(viewModel);
 
         // Assert
         Assert.Equal(viewModel.Id, entity.Id);
@@ -74,22 +73,21 @@ public class AutoMapperByteTests
     }
 
     [Theory]
-    [InlineData(default)]
     [InlineData(null)]
-    [InlineData(byte.MinValue)]
+    [InlineData(sbyte.MinValue)]
     [InlineData(0)]
-    [InlineData(byte.MaxValue)]
-    public void Should_Map_ViewModelToEntitylWithValue(byte parameterValue)
+    [InlineData(sbyte.MaxValue)]
+    public void Should_Map_ViewModelToEntitylWithValue(sbyte parameterValue)
     {
         // Arrange
-        var viewModel = new ByteModelViewModel
+        var viewModel = new SbyteModelViewModel
         {
             Id = 1,
             Value = parameterValue,
         };
 
         // Act
-        var entity = _mapper.Map<ByteModel>(viewModel);
+        var entity = _mapper.Map<SbyteModel>(viewModel);
 
         // Assert
         Assert.Equal(viewModel.Id, entity.Id);
