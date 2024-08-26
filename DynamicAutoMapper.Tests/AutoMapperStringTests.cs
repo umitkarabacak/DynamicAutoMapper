@@ -1,10 +1,10 @@
 ﻿namespace DynamicAutoMapper.Tests;
 
-public class AutoMapperTests
+public class AutoMapperStringTests
 {
     private readonly IMapper _mapper;
 
-    public AutoMapperTests()
+    public AutoMapperStringTests()
     {
         var config = new MapperConfiguration(cfg =>
         {
