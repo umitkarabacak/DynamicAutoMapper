@@ -83,7 +83,7 @@ public class AutoMapperStringTests
         var viewModel = new StringModelViewModel
         {
             Id = 1,
-            Value = string.Empty,
+            Value = parameterValue,
         };
 
         // Act

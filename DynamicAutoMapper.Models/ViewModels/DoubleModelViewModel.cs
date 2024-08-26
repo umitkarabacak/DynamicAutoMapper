@@ -2,5 +2,5 @@
 
 public class DoubleModelViewModel : BaseEntityViewModel
 {
-    public int Value { get; set; }
+    public double Value { get; set; }
 }

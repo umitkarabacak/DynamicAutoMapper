@@ -1,10 +1,10 @@
 ﻿namespace DynamicAutoMapper.Tests;
 
-public class AutoMapperIntTests
+public class AutoMapperDecimalTests
 {
     private readonly IMapper _mapper;
 
-    public AutoMapperIntTests()
+    public AutoMapperDecimalTests()
     {
         var config = new MapperConfiguration(cfg =>
         {
@@ -18,14 +18,14 @@ public class AutoMapperIntTests
     public void Should_Map_EntityToViewModelDefaultValue()
     {
         // Arrange
-        var entity = new IntModel
+        var entity = new DecimalModel
         {
             Id = Random.Shared.Next(0, 250),
             Value = default,
         };
 
         // Act
-        var viewModel = _mapper.Map<IntModelViewModel>(entity);
+        var viewModel = _mapper.Map<DecimalModelViewModel>(entity);
 
         // Assert
         Assert.Equal(entity.Id, viewModel.Id);
@@ -35,22 +35,22 @@ public class AutoMapperIntTests
     [Theory]
     [InlineData(default)]
     [InlineData(null)]
-    [InlineData(-100_00)]
-    [InlineData(-1)]
-    [InlineData(0)]
-    [InlineData(1)]
-    [InlineData(100_000)]
-    public void Should_Map_EntityToViewModelWithValue(int parameterValue)
+    [InlineData(-100_000.00)]
+    [InlineData(-1.00)]
+    [InlineData(0.00)]
+    [InlineData(1.00d)]
+    [InlineData(100_000.00)]
+    public void Should_Map_EntityToViewModelWithValue(decimal parameterValue)
     {
         // Arrange
-        var entity = new IntModel
+        var entity = new DecimalModel
         {
             Id = Random.Shared.Next(0, 250),
             Value = parameterValue,
         };
 
         // Act
-        var viewModel = _mapper.Map<IntModelViewModel>(entity);
+        var viewModel = _mapper.Map<DecimalModelViewModel>(entity);
 
         // Assert
         Assert.Equal(entity.Id, viewModel.Id);
@@ -61,14 +61,14 @@ public class AutoMapperIntTests
     public void Should_Map_ViewModelToEntityDefaultValue()
     {
         // Arrange
-        var viewModel = new IntModelViewModel
+        var viewModel = new DecimalModelViewModel
         {
             Id = 1,
             Value = default,
         };
 
         // Act
-        var entity = _mapper.Map<IntModel>(viewModel);
+        var entity = _mapper.Map<DecimalModel>(viewModel);
 
         // Assert
         Assert.Equal(viewModel.Id, entity.Id);
@@ -78,22 +78,22 @@ public class AutoMapperIntTests
     [Theory]
     [InlineData(default)]
     [InlineData(null)]
-    [InlineData(-100_00)]
-    [InlineData(-1)]
-    [InlineData(0)]
-    [InlineData(1)]
-    [InlineData(100_000)]
-    public void Should_Map_ViewModelToEntitylWithValue(int parameterValue)
+    [InlineData(-100_000.00)]
+    [InlineData(-1.00)]
+    [InlineData(0.00)]
+    [InlineData(1.00d)]
+    [InlineData(100_000.00)]
+    public void Should_Map_ViewModelToEntitylWithValue(decimal parameterValue)
     {
         // Arrange
-        var viewModel = new IntModelViewModel
+        var viewModel = new DecimalModelViewModel
         {
             Id = 1,
             Value = parameterValue,
         };
 
         // Act
-        var entity = _mapper.Map<IntModel>(viewModel);
+        var entity = _mapper.Map<DecimalModel>(viewModel);
 
         // Assert
         Assert.Equal(viewModel.Id, entity.Id);

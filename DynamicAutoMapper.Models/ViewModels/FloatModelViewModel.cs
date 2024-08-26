@@ -2,5 +2,5 @@
 
 public class FloatModelViewModel : BaseEntityViewModel
 {
-    public int Value { get; set; }
+    public float Value { get; set; }
 }

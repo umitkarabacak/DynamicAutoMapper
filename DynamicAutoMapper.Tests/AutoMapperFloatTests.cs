@@ -89,7 +89,7 @@ public class AutoMapperFloatTests
         var viewModel = new FloatModelViewModel
         {
             Id = 1,
-            Value = default,
+            Value = parameterValue,
         };
 
         // Act

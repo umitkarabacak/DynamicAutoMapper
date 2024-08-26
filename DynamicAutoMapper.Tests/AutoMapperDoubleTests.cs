@@ -99,7 +99,7 @@ public class AutoMapperDoubleTests
         var viewModel = new DoubleModelViewModel
         {
             Id = 1,
-            Value = default,
+            Value = parameterValue,
         };
 
         // Act

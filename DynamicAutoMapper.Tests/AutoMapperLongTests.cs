@@ -89,7 +89,7 @@ public class AutoMapperLongTests
         var viewModel = new LongModelViewModel
         {
             Id = 1,
-            Value = default,
+            Value = parameterValue,
         };
 
         // Act
