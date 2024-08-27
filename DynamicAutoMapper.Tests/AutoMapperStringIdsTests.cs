@@ -33,22 +33,22 @@ public class AutoMapperStringIdsTests
         Assert.Equal(entity.ValueIds.Split(','), viewModel.ValueIds);
     }
 
-    //[Fact]
-    //public void Should_Map_ViewModelToEntityDefaultValue()
-    //{
-    //    // Arrange
-    //    var viewModel = new StringIdsModelViewModel
-    //    {
-    //        Id = 1,
-    //        ValueIds = ["ümit", "karabacak"],
-    //    };
+    [Fact]
+    public void Should_Map_ViewModelToEntityDefaultValue()
+    {
+        // Arrange
+        var viewModel = new StringIdsModelViewModel
+        {
+            Id = 1,
+            ValueIds = ["ümit", "karabacak"],
+        };
 
-    //    // Act
-    //    var entity = _mapper.Map<StringIdsModel>(viewModel);
+        // Act
+        var entity = _mapper.Map<StringIdsModel>(viewModel);
 
-    //    // Assert
-    //    Assert.Equal(viewModel.Id, entity.Id);
-    //    Assert.Equal(string.Join(',', viewModel.ValueIds), entity.ValueIds);
-    //    Assert.Equal(viewModel.ValueIds, entity.ValueIds.Split(','));
-    //}
+        // Assert
+        Assert.Equal(viewModel.Id, entity.Id);
+        Assert.Equal(string.Join(',', viewModel.ValueIds), entity.ValueIds);
+        Assert.Equal(viewModel.ValueIds, entity.ValueIds.Split(','));
+    }
 }

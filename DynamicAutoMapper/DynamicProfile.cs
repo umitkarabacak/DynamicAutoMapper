@@ -30,8 +30,6 @@ public class DynamicProfile : Profile
             .Distinct()
             .ToList();
 
-        var createMapMethod = typeof(Profile).GetMethod("CreateMap", new Type[] { });
-
         foreach (var entityType in entityTypes)
         {
             // Her entity türü için, aynı isimle başlayan model türlerini bulun
@@ -45,13 +43,10 @@ public class DynamicProfile : Profile
                 // Sonu "Ids" ile biten alanlar için özel map işlemleri ekleyin
                 var idsProperties = modelType.GetProperties()
                     .Where(p => p.Name.EndsWith("Ids") &&
-                               (
-                                    p.PropertyType == typeof(string[]) ||
-                                    p.PropertyType == typeof(int[]) ||
-                                    p.PropertyType == typeof(long[]) ||
-                                    p.PropertyType == typeof(Guid[])
-                                )
-                            )
+                               (p.PropertyType == typeof(string[]) ||
+                                p.PropertyType == typeof(int[]) ||
+                                p.PropertyType == typeof(long[]) ||
+                                p.PropertyType == typeof(Guid[])))
                     .ToList();
 
                 foreach (var property in idsProperties)
@@ -82,26 +77,28 @@ public class DynamicProfile : Profile
                     }
                 }
 
-                //// Enum dizileri için map işlemleri ekleyin
-                //var enumProperties = modelType.GetProperties()
-                //    .Where(p => p.PropertyType.IsArray && p.PropertyType.GetElementType().IsEnum)
-                //    .Distinct()
-                //    .ToList();
+                // Enum dizileri için map işlemleri ekleyin
+                var enumProperties = modelType.GetProperties()
+                    .Where(p => p.PropertyType.IsArray && p.PropertyType.GetElementType().IsEnum)
+                    .ToList();
 
-                //foreach (var property in enumProperties)
-                //{
-                //    var entityProp = entityType.GetProperty(property.Name);
-                //    if (entityProp != null)
-                //    {
-                //        var enumType = property.PropertyType.GetElementType();
-                //        map.ForMember(property.Name, opts => opts.MapFrom(src => convertToEnumArray((string)entityProp.GetValue(src), enumType)));
-                //        map.ReverseMap().ForMember(property.Name, opts => opts.MapFrom(src => convertEnumArrayToString((Array)property.GetValue(src))));
-                //    }
-                //}
+                foreach (var property in enumProperties)
+                {
+                    var entityProp = entityType.GetProperty(property.Name);
+                    if (entityProp != null)
+                    {
+                        var enumType = property.PropertyType.GetElementType();
+                        map.ForMember(property.Name, opts => opts.MapFrom(src => convertToEnumArray((string)entityProp.GetValue(src), enumType)));
+                        map.ReverseMap().ForMember(property.Name, opts => opts.MapFrom(src => convertEnumArrayToString((Array)property.GetValue(src))));
+                    }
+                }
 
-                // ReverseMap'i çağır
-                var reverseMapMethod = map.GetType().GetMethod("ReverseMap");
-                reverseMapMethod.Invoke(map, null);
+                // Enum Array yada Ids ile bitmeyenler için ReverseMap'i çağır
+                if (idsProperties.Count == 0 && enumProperties.Count == 0)
+                {
+                    var reverseMapMethod = map.GetType().GetMethod("ReverseMap");
+                    reverseMapMethod.Invoke(map, null);
+                }
             }
         }
     }
