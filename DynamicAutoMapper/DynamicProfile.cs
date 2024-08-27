@@ -47,6 +47,7 @@ public class DynamicProfile : Profile
                                 p.PropertyType == typeof(int[]) ||
                                 p.PropertyType == typeof(long[]) ||
                                 p.PropertyType == typeof(Guid[])))
+                    .Distinct()
                     .ToList();
 
                 foreach (var property in idsProperties)
