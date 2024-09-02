@@ -4,16 +4,14 @@ public class DynamicProfile : Profile
 {
     public DynamicProfile()
     {
-#if DEBUG
         // BaseEntity<> ve BaseEntityViewModel<> türlerinden birinin assembly'sini alın
         var modelBaseEntityAssembly = typeof(BaseEntity<>).Assembly;
         var modelBaseEntityViewModelAssembly = typeof(BaseEntityViewModel<>).Assembly;
 
         var assemblies = new[] { modelBaseEntityAssembly, modelBaseEntityViewModelAssembly };
-#else
-        // Get all assemblies referenced by the current assembly
-        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-#endif
+
+        //// Get all assemblies referenced by the current assembly
+        ////var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
         // Find all types derived from BaseEntity<T>
         var entityTypes = assemblies.SelectMany(a => a.GetTypes())
