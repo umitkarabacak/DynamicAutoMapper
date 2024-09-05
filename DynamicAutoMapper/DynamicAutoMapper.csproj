@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -8,9 +7,4 @@
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="13.0.1" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\DynamicAutoMapper.Models\DynamicAutoMapper.Models.csproj" />
-	</ItemGroup>
-
 </Project>

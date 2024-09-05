@@ -16,7 +16,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\DynamicAutoMapper.Models\DynamicAutoMapper.Models.csproj" />
 		<ProjectReference Include="..\DynamicAutoMapper\DynamicAutoMapper.csproj" />
 	</ItemGroup>
 
