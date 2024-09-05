@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+	<metadata>
+		<id>DynamicAutoMapper</id>
+		<version>1.0.0</version>
+		<title>DynamicAutoMapper</title>
+		<authors>Ümit Karabacak</authors>
+		<owners>Ümit Karabacak</owners>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<license type="expression">MIT</license>
+		<description>AutoMapper Extensions</description>
+		<tags>AutoMapper DynamicMapper Mapper</tags>
+		<copyright>Copyright 2024</copyright>
+		<dependencies>
+			<dependency id="AutoMapper" version="13.0.1" />
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="bin\Release\net8.0\DynamicAutoMapper.dll" target="lib\net8.0\DynamicAutoMapper.dll"></file>
+		<file src="bin\Release\net8.0\DynamicAutoMapper.pdb" target="lib\net8.0\DynamicAutoMapper.pdb"></file>
+	</files>
+</package>
