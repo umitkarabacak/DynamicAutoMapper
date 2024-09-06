@@ -109,7 +109,7 @@ public class DynamicProfile : Profile
 
     static string[] convertToArray(string ids)
     {
-        return string.IsNullOrWhiteSpace(ids) ? [] : ids.Split(',');
+        return string.IsNullOrWhiteSpace(ids) ? Array.Empty<string>() : ids.Split(',');
     }
 
     static string convertToString(Array ids)
