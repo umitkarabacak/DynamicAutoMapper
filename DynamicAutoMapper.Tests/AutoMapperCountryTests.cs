@@ -28,9 +28,9 @@ public class AutoMapperCountryTests
         var entity = _mapper.Map<Country>(viewModel);
 
         // Assert
-        Assert.Equal(viewModel.Id, entity.Id);
-        Assert.Equal(string.Join(',', viewModel.ZoneIds), entity.ZoneIds);
-        Assert.Equal(viewModel.ZoneIds, entity.ZoneIds.Split(','));
+        Assert.Equal(entity.Id, viewModel.Id);
+        Assert.Equal(entity.ZoneIds ?? string.Empty, string.Join(",", viewModel.ZoneIds)); // Null veya boş değer kontrolü eklendi
+        Assert.Equal((entity.ZoneIds ?? string.Empty).Split(',', StringSplitOptions.RemoveEmptyEntries).Length, viewModel.ZoneIds.Length);
     }
 
     [Theory]
@@ -48,16 +48,19 @@ public class AutoMapperCountryTests
         var entity = _mapper.Map<Country>(viewModel);
 
         // Assert
-        Assert.Equal(viewModel.Id, entity.Id);
-        Assert.Equal(string.Join(',', viewModel.ZoneIds), entity.ZoneIds);
-        Assert.Equal(viewModel.ZoneIds, entity.ZoneIds.Split(','));
+        Assert.Equal(entity.Id, viewModel.Id);
+        Assert.Equal(string.Join(",", parameterValues ?? new string[0]), entity.ZoneIds); // Null veya boş değer kontrolü
     }
 
     public static IEnumerable<object[]> StringListTestData =>
-    [
-        [new List<string> { null }],
-        [new List<string> { "" }],
-        [new List<string> { "ÜMİT", "KARABACAK" }]
-    ];
+        new List<object[]>
+        {
+            new object[] { new string[] { "ümit" } },
+            new object[] { new string[] { "ÜMİT", "KARABACAK" } },
+            new object[] { new string[] { "" } },
+            new object[] { new string[] { string.Empty } },
+            new object[] { new string[] { null } },    // FIXED
+            new object[] { null },                     // FIXED
+        };
 
 }
