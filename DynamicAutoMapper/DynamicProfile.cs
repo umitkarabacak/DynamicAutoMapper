@@ -39,10 +39,13 @@ public class DynamicProfile : Profile
                 // Handle properties ending with "Ids"
                 var idsProperties = modelType.GetProperties()
                     .Where(p => p.Name.EndsWith("Ids") &&
-                               (p.PropertyType == typeof(string[]) ||
-                                p.PropertyType == typeof(int[]) ||
-                                p.PropertyType == typeof(long[]) ||
-                                p.PropertyType == typeof(Guid[])))
+                               (
+                                    p.PropertyType == typeof(char[])
+                                    || p.PropertyType == typeof(string[])
+                                    || p.PropertyType == typeof(int[])
+                                    || p.PropertyType == typeof(long[])
+                                    || p.PropertyType == typeof(Guid[]))
+                            )
                     .Distinct()
                     .ToList();
 
@@ -51,7 +54,12 @@ public class DynamicProfile : Profile
                     var entityProp = entityType.GetProperty(property.Name);
                     if (entityProp != null)
                     {
-                        if (property.PropertyType == typeof(string[]))
+                        if (property.PropertyType == typeof(char[]))
+                        {
+                            map.ForMember(property.Name, opts => opts.MapFrom(src => convertToArray((string)entityProp.GetValue(src) ?? string.Empty)));
+                            map.ReverseMap().ForMember(property.Name, opts => opts.MapFrom(src => convertToString((char[])property.GetValue(src) ?? Array.Empty<char>())));
+                        }
+                        else if (property.PropertyType == typeof(string[]))
                         {
                             map.ForMember(property.Name, opts => opts.MapFrom(src => convertToArray((string)entityProp.GetValue(src) ?? string.Empty)));
                             map.ReverseMap().ForMember(property.Name, opts => opts.MapFrom(src => convertToString((string[])property.GetValue(src) ?? Array.Empty<string>())));
