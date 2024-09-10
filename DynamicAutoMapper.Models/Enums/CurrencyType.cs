@@ -6,5 +6,6 @@ public enum CurrencyType
     TL = 1,
     Dollar = 2,
     Euro = 3,
-    Pound = 4
+    Pound = 4,
+    Sterlin = 5
 }
