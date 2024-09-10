@@ -41,11 +41,13 @@ public class DynamicProfile : Profile
                     .Where(p => p.Name.EndsWith("Ids") &&
                                (
                                     p.PropertyType == typeof(char[])
+                                    || p.PropertyType == typeof(bool[])
                                     || p.PropertyType == typeof(string[])
                                     || p.PropertyType == typeof(int[])
                                     || p.PropertyType == typeof(long[])
                                     || p.PropertyType == typeof(float[])
-                                    || p.PropertyType == typeof(Guid[]))
+                                    || p.PropertyType == typeof(Guid[])
+                                )
                             )
                     .Distinct()
                     .ToList();
@@ -59,6 +61,11 @@ public class DynamicProfile : Profile
                         {
                             map.ForMember(property.Name, opts => opts.MapFrom(src => convertToArray((string)entityProp.GetValue(src) ?? string.Empty)));
                             map.ReverseMap().ForMember(property.Name, opts => opts.MapFrom(src => convertToString((char[])property.GetValue(src) ?? Array.Empty<char>())));
+                        }
+                        else if (property.PropertyType == typeof(bool[]))
+                        {
+                            map.ForMember(property.Name, opts => opts.MapFrom(src => convertToArray((string)entityProp.GetValue(src) ?? string.Empty)));
+                            map.ReverseMap().ForMember(property.Name, opts => opts.MapFrom(src => convertToString((bool[])property.GetValue(src) ?? Array.Empty<bool>())));
                         }
                         else if (property.PropertyType == typeof(string[]))
                         {
