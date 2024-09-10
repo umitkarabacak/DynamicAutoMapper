@@ -44,6 +44,7 @@ public class DynamicProfile : Profile
                                     || p.PropertyType == typeof(string[])
                                     || p.PropertyType == typeof(int[])
                                     || p.PropertyType == typeof(long[])
+                                    || p.PropertyType == typeof(float[])
                                     || p.PropertyType == typeof(Guid[]))
                             )
                     .Distinct()
@@ -73,6 +74,11 @@ public class DynamicProfile : Profile
                         {
                             map.ForMember(property.Name, opts => opts.MapFrom(src => convertToArray((string)entityProp.GetValue(src) ?? string.Empty).Select(long.Parse).ToArray()));
                             map.ReverseMap().ForMember(property.Name, opts => opts.MapFrom(src => convertToString((long[])property.GetValue(src) ?? Array.Empty<long>())));
+                        }
+                        else if (property.PropertyType == typeof(float[]))
+                        {
+                            map.ForMember(property.Name, opts => opts.MapFrom(src => convertToArray((string)entityProp.GetValue(src) ?? string.Empty).Select(float.Parse).ToArray()));
+                            map.ReverseMap().ForMember(property.Name, opts => opts.MapFrom(src => convertToString((float[])property.GetValue(src) ?? Array.Empty<float>())));
                         }
                         else if (property.PropertyType == typeof(Guid[]))
                         {
